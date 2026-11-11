@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Yuvraj Kumar, final-year Mechanical Engineering at IIT Kanpur: software, AI/ML, product and mechanical engineering projects.">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Yuvraj Kumar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single engineering "datasheet" column; each project is a spec card led by its measured result, filterable by role. */
+:root{
+  --bg:#f2f4f3; --surface:#ffffff; --ink:#15212a; --muted:#56646d; --line:#d3dadd;
+  --accent:#f0b429; --on-accent:#15212a; --link:#1f5f8b; --chip:#e6ebec;
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",Consolas,"Courier New",monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0e1418; --surface:#151d22; --ink:#e4eaed; --muted:#9aa8b0; --line:#27333a;
+  --accent:#f2c14e; --on-accent:#111619; --link:#86bde3; --chip:#1d272d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1418; --surface:#151d22; --ink:#e4eaed; --muted:#9aa8b0; --line:#27333a;
+  --accent:#f2c14e; --on-accent:#111619; --link:#86bde3; --chip:#1d272d; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.wrap{max-width:1080px;margin:0 auto;padding-block:40px 64px;display:grid;gap:56px}
+a{color:var(--link);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--link);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
+.label{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.mono{font-family:var(--f-mono)}
+
+/* Hero */
+.hero{display:grid;gap:18px}
+.hero h1{font-size:clamp(46px,10vw,104px);font-weight:800;font-stretch:72%;line-height:.92;letter-spacing:-.01em}
+.hero h1 span{background:linear-gradient(transparent 62%, var(--accent) 62%, var(--accent) 92%, transparent 92%)}
+.lede{font-size:clamp(18px,2.4vw,22px);max-width:40ch;margin:0}
+.meta-row{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center}
+.roles{display:flex;flex-wrap:wrap;gap:8px}
+.role{font-family:var(--f-mono);font-size:13px;border:1px solid var(--line);border-radius:999px;padding:4px 12px;background:var(--surface)}
+.links{display:flex;flex-wrap:wrap;gap:10px 18px;font-weight:500}
+
+/* Section heads */
+.sec{display:grid;gap:20px}
+.sec-head{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:baseline;justify-content:space-between;border-bottom:2px solid var(--ink);padding-bottom:8px}
+.sec-head h2{font-size:clamp(26px,4vw,34px);font-weight:700;font-stretch:85%}
+
+/* Featured experience */
+.feature{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:24px;display:grid;gap:18px}
+.feature-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 16px;align-items:baseline}
+.feature h3{font-size:24px;font-weight:700;font-stretch:90%}
+.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.phases>div{min-width:0}
+.phases h4{margin:0 0 6px;font-size:15px}
+.phases p{margin:0;color:var(--muted)}
+.figures{display:flex;flex-wrap:wrap;gap:12px 32px;border-top:1px dashed var(--line);padding-top:14px}
+.fig b{display:block;font-family:var(--f-mono);font-size:22px;font-weight:500;font-variant-numeric:tabular-nums}
+.fig span{font-size:13px;color:var(--muted)}
+
+/* Filter */
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.filters button{font:500 14px var(--f-body);color:var(--ink);background:var(--chip);border:1px solid transparent;border-radius:999px;padding:6px 14px;cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.filters button:hover{border-color:var(--muted)}
+
+/* Project cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card .ctx{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.card h3{font-size:20px;font-weight:700;font-stretch:90%;line-height:1.15}
+.card p{margin:0;font-size:15px}
+.result{font-family:var(--f-mono);font-size:21px;font-weight:500;font-variant-numeric:tabular-nums;line-height:1.2;border-left:4px solid var(--accent);padding-left:10px}
+.result small{display:block;font-family:var(--f-body);font-size:13px;color:var(--muted);font-weight:400}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:4px}
+.tags span{font-family:var(--f-mono);font-size:11.5px;background:var(--chip);border-radius:4px;padding:2px 7px}
+.card a.repo{font-size:14px;font-weight:500}
+.empty{color:var(--muted)}
+
+/* Two-column lists */
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px 32px}
+.item{display:grid;gap:4px;min-width:0}
+.item h3{font-size:19px;font-weight:700;font-stretch:90%}
+.item p{margin:0}
+.item .ctx{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+ul.plain{margin:0;padding-left:18px;display:grid;gap:6px}
+
+/* Skills */
+.skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px 28px}
+.skills div{min-width:0}
+.skills p{margin:4px 0 0}
+
+/* Contact */
+.contact{background:var(--ink);color:var(--bg);border-radius:12px;padding:28px 24px;display:grid;gap:14px}
+.contact h2{font-size:clamp(26px,4vw,34px);font-stretch:85%}
+.contact a{color:var(--accent)}
+.email{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.email code{font-family:var(--f-mono);font-size:17px;user-select:all;word-break:break-all}
+.email button{font:500 14px var(--f-body);background:var(--accent);color:var(--on-accent);border:0;border-radius:6px;padding:6px 12px;cursor:pointer}
+.foot{font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion: no-preference){.card{transition:border-color .15s}.card:hover{border-color:var(--muted)}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="label">B.Tech, Mechanical Engineering · IIT Kanpur · Class of 2027</div>
+  <h1><span>Yuvraj</span> Kumar</h1>
+  <p class="lede">I build software, ML models and machines, and I judge each one by a number I can measure.</p>
+  <div class="meta-row">
+    <div class="roles" aria-label="Roles I'm applying for">
+      <span class="role">SDE</span><span class="role">AI / ML</span><span class="role">Product</span><span class="role">Mechanical core</span>
+    </div>
+  </div>
+  <nav class="links" aria-label="Profiles">
+    <a href="https://github.com/yuvraj2815" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/yuvraj-kumar-4462b92b8/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="#contact">Email</a>
+  </nav>
+</header>
+
+<section class="sec" aria-labelledby="exp">
+  <div class="sec-head"><h2 id="exp">Experience</h2><span class="label">Internship</span></div>
+  <article class="feature">
+    <div class="feature-top">
+      <h3>Attack Graph Engine for Enterprise Risk</h3>
+      <span class="ctx mono">SDE Intern · C3iHub, IIT Kanpur · Feb–Jul 2026</span>
+    </div>
+    <p style="margin:0">Security teams face far more known vulnerabilities than they can patch. I built a system that turns scans, network configuration and Active Directory data into ranked attack paths, so a team can see which single fix breaks the most routes to its critical assets.</p>
+    <div class="phases">
+      <div><h4>Phase 1 · ML pipeline</h4><p>A multi-label classifier mapping CVEs to MITRE ATT&amp;CK techniques, using MiniLM embeddings with CWE/CVSS features and One-vs-Rest logistic regression with per-label thresholds. Near-duplicate CVEs were grouped and split with GroupKFold, so test scores stay honest.</p></div>
+      <div><h4>Phase 2 · Graph engine</h4><p>A Neo4j attack graph of devices, identities, network segments and applications, built by a 3-stage pipeline: fact generation, edge derivation, then traversal checks. Paths are ranked by live EPSS exploit-likelihood scores.</p></div>
+    </div>
+    <div class="figures">
+      <div class="fig"><b>194</b><span>nodes</span></div>
+      <div class="fig"><b>~1,600</b><span>edges</span></div>
+      <div class="fig"><b>5 / 12</b><span>node / edge types</span></div>
+      <div class="fig"><b>1</b><span>highest-impact patch surfaced</span></div>
+    </div>
+    <a class="repo" href="https://github.com/yuvraj2815/Attack-Graph-Engine-for-Enterprise-Risk-Analysis---SDE-Intern" target="_blank" rel="noopener">View on GitHub</a>
+  </article>
+</section>
+
+<section class="sec" aria-labelledby="proj">
+  <div class="sec-head"><h2 id="proj">Projects</h2><span class="label" id="count">13 projects</span></div>
+  <div class="filters" role="group" aria-label="Filter projects by role">
+    <button type="button" id="f-all" data-f="all" aria-pressed="true">All</button>
+    <button type="button" id="f-sde" data-f="sde" aria-pressed="false">Software</button>
+    <button type="button" id="f-ml" data-f="ml" aria-pressed="false">AI / ML</button>
+    <button type="button" id="f-mech" data-f="mech" aria-pressed="false">Mechanical</button>
+    <button type="button" id="f-product" data-f="product" aria-pressed="false">Product</button>
+  </div>
+  <div class="grid" id="grid">
+
+    <article class="card" data-tags="sde ml">
+      <div class="ctx">Self project · May–Jul 2026</div>
+      <h3>Agentic GraphRAG for Enterprise Security</h3>
+      <div class="result">Log4Shell host → Domain Controller<small>multi-hop path found by the agent on its own</small></div>
+      <p>An LLM agent that answers security questions in plain English by calling 3 graph tools: find attack paths, expand a host's neighbourhood, and rank vulnerabilities. Every host and CVE in an answer must trace back to tool output, and the loop is bounded.</p>
+      <div class="tags"><span>Neo4j</span><span>Tool calling</span><span>Gradio</span><span>pytest</span></div>
+      <a class="repo" href="https://github.com/yuvraj2815/Agentic-GraphRAG-for-Enterprise-Security" target="_blank" rel="noopener">View on GitHub</a>
+    </article>
+
+    <article class="card" data-tags="sde">
+      <div class="ctx">Self project · Jan–Mar 2026</div>
+      <h3>Concurrent Attack-Graph Query API</h3>
+      <div class="result">12× throughput<small>99% cache hit rate · 75% lower latency</small></div>
+      <p>An async API in Rust that serves attack-graph queries under concurrent load, with a Redis cache in front of the graph.</p>
+      <div class="tags"><span>Rust</span><span>Redis</span><span>Async HTTP</span></div>
+      <a class="repo" href="https://github.com/yuvraj2815/Concurrent-Attack-Graph-Query-API" target="_blank" rel="noopener">View on GitHub</a>
+    </article>
+
+    <article class="card" data-tags="sde">
+      <div class="ctx">Self project · Jan–Mar 2026</div>
+      <h3>LSM-Tree Key-Value Storage Engine</h3>
+      <div class="result">8,300 ops/s<small>with crash recovery, tested by simulated crashes</small></div>
+      <p>A persistent storage engine with a write-ahead log, memtable, sorted on-disk tables and compaction, the design used by databases such as RocksDB and Cassandra.</p>
+      <div class="tags"><span>Storage engines</span><span>WAL</span><span>Compaction</span></div>
+      <a class="repo" href="https://github.com/yuvraj2815/LSM-Tree-Key-Value-Storage-Engine" target="_blank" rel="noopener">View on GitHub</a>
+    </article>
+
+    <article class="card" data-tags="ml mech">
+      <div class="ctx">ME644 course project · Prof. Malay K. Das · Jan–Apr 2026</div>
+      <h3>ML-Based Aerodynamic Drag Prediction</h3>
+      <div class="result">R² = 0.9992<small>on 4,896 held-out synthetic samples</small></div>
+      <p>An ML surrogate for airfoil drag, trained on a 24,480-row physics-based dataset across 10 NACA airfoils. I compared five models, from ridge regression to a physics-informed neural network that enforces the drag polar in its loss.</p>
+      <div class="tags"><span>Random Forest</span><span>PINN</span><span>Aerodynamics</span></div>
+      <a class="repo" href="https://github.com/yuvraj2815/ML-Based-Aerodynamic-Drag-Prediction" target="_blank" rel="noopener">View on GitHub</a>
+    </article>
+
+    <article class="card" data-tags="ml mech">
+      <div class="ctx">Self project · Oct–Dec 2025</div>
+      <h3>Physics-Informed Bearing Fault Diagnosis</h3>
+      <div class="result">100% test accuracy<small>every prediction checked against physical fault frequencies</small></div>
+      <p>An explainable classifier that uses defect frequencies derived from bearing geometry, plus envelope-analysis features, to tell which part of a bearing has failed.</p>
+      <div class="tags"><span>Signal processing</span><span>Explainable ML</span></div>
+      <a class="repo" href="https://github.com/yuvraj2815/Physics-Informed-Bearing-Fault-Diagnosis" target="_blank" rel="noopener">View on GitHub</a>
+    </article>
+
+    <article class="card" data-tags="mech">
+      <div class="ctx">ME354 course project · Prof. Bishakh Bhattacharya · Jan–Apr 2026</div>
+      <h3>Universal Portable Vibration Energy Harvester</h3>
+      <div class="result">3.85 mW across 10–200 Hz<small>3× a fixed-tuned harvester · 6× with SSHI</small></div>
+      <p>A harvester that retunes its own resonance. A shape-memory-alloy absorber changes stiffness when heated, a PLL tracks the vibration frequency, and a gain-scheduled LQR controller keeps the device at resonance.</p>
+      <div class="tags"><span>Vibrations</span><span>LQR control</span><span>Piezoelectrics</span></div>
+    </article>
+
+    <article class="card" data-tags="mech">
+      <div class="ctx">ME302 course project · Dr. Tushar Sikroria · Jan–Apr 2026</div>
+      <h3>Gas-Turbine Test Facility Scaling</h3>
+      <div class="result">Max feasible scale 0.6565<small>pressure ratio 1.069 at the operating point</small></div>
+      <p>A Python solver that sweeps facility scale and solves the thermodynamics at each step, using Newton–Raphson for station Mach numbers and a fitted compressor speedline.</p>
+      <div class="tags"><span>NumPy / SciPy</span><span>Brayton cycle</span><span>Numerical methods</span></div>
+      <a class="repo" href="https://github.com/yuvraj2815/Gas-Turbine-Test-Facility-Scaling" target="_blank" rel="noopener">View on GitHub</a>
+    </article>
+
+    <article class="card" data-tags="mech ml">
+      <div class="ctx">Self project · Oct–Dec 2025</div>
+      <h3>Spindle Thermal-Error Digital Twin</h3>
+      <div class="result">90 µm → 1.6 µm<small>peak positioning error, 98% lower</small></div>
+      <p>A digital twin that predicts how heat from bearings and the motor makes a machine-tool spindle drift, estimates unmeasured shaft temperature with an observer, and feeds a correction back to the machine.</p>
+      <div class="tags"><span>Thermal modelling</span><span>State observer</span><span>Manufacturing</span></div>
+      <a class="repo" href="https://github.com/yuvraj2815/Spindle-Thermal-Error-Digital-Twin" target="_blank" rel="noopener">View on GitHub</a>
+    </article>
+
+    <article class="card" data-tags="mech">
+      <div class="ctx">Self project · May–Jul 2026</div>
+      <h3>Launch-Vehicle Ascent Trajectory Simulation</h3>
+      <div class="result">~10<sup>−15</sup> relative error<small>validated against the Tsiolkovsky rocket equation</small></div>
+      <p>A 3-DOF rocket ascent simulator with gravity-turn steering and the U.S. Standard Atmosphere.</p>
+      <div class="tags"><span>SciPy solve_ivp</span><span>Flight dynamics</span></div>
+      <a class="repo" href="https://github.com/yuvraj2815/3-DOF-Launch-Vehicle-Ascent-Trajectory-Simulation" target="_blank" rel="noopener">View on GitHub</a>
+    </article>
+
+    <article class="card" data-tags="mech product">
+      <div class="ctx">DES602 course project · Prof. Amar Behara · Jan–Apr 2025</div>
+      <h3>SolarClean</h3>
+      <div class="result">Solar-powered air purifier<small>HEPA + activated carbon, built to be low cost</small></div>
+      <p>A DIY purifier for indoor air pollution, evaluated on cost, sustainability and filtration efficiency.</p>
+      <div class="tags"><span>Product design</span><span>Sustainability</span></div>
+      <a class="repo" href="https://github.com/yuvraj2815/SolarClean" target="_blank" rel="noopener">View on GitHub</a>
+    </article>
+
+    <article class="card" data-tags="mech product">
+      <div class="ctx">DES602 course project · Prof. Amar Behara · Jan–Apr 2025</div>
+      <h3>Spill-Proof Dispenser</h3>
+      <div class="result">3D-printed prototype<small>designed from users' pain points</small></div>
+      <p>A powder dispenser that pours precisely without leaking. I studied where conventional designs fail, then redesigned it for grip and accuracy.</p>
+      <div class="tags"><span>User research</span><span>3D printing</span></div>
+      <a class="repo" href="https://github.com/yuvraj2815/Spill-Proof-Dispenser" target="_blank" rel="noopener">View on GitHub</a>
+    </article>
+
+    <article class="card" data-tags="sde">
+      <div class="ctx">Summer project · Electronics Club, IITK · Apr–Jul 2024</div>
+      <h3>EMG-Controlled Shooting Game</h3>
+      <div class="result">Hands-free control<small>muscle signals in, game actions out</small></div>
+      <p>A game you play by flexing a muscle. EMG signals are filtered on an Arduino, turned into inputs with threshold logic, and sent to the game over serial.</p>
+      <div class="tags"><span>Arduino</span><span>EMG</span><span>Real-time I/O</span></div>
+      <a class="repo" href="https://github.com/ElectronicsClub-IITK/EMG-Controlled-Shooting-Game/tree/main" target="_blank" rel="noopener">View on GitHub</a>
+    </article>
+
+    <article class="card" data-tags="ml product">
+      <div class="ctx">Accenture Innovation Challenge 2026 · Aug 2026–present</div>
+      <h3>Athena: KPI Storytelling Engine</h3>
+      <div class="result">3–5 days → seconds<small>time to explain why a business metric moved</small></div>
+      <p>A 4-stage AI pipeline that uses data, support tickets, CRM notes and news to find the likely cause of a KPI change and recommend actions. Qualified for the first round.</p>
+      <div class="tags"><span>Driver trees</span><span>Anomaly detection</span><span>LLMs</span></div>
+    </article>
+
+    <p class="empty" id="empty" hidden>No projects match this filter.</p>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="cases">
+  <div class="sec-head"><h2 id="cases">Business &amp; leadership</h2><span class="label">Beyond engineering</span></div>
+  <div class="cols">
+    <div class="item">
+      <span class="ctx">Axis Bank MOVES 2026 · National case challenge · Jun 2026–present</span>
+      <h3>The Liability-First Bank</h3>
+      <p>Diagnosed why deposit growth lagged lending and proposed a phased go-to-market plan, projecting the CASA mix to recover from 38% to 43%. Advanced through multiple rounds in a field of 43,110+ registrants.</p>
+    </div>
+    <div class="item">
+      <span class="ctx">Fine Arts Club, IIT Kanpur · Apr 2025–Apr 2026</span>
+      <h3>Coordinator</h3>
+      <p>Led 25+ secretaries and a ₹1 lakh+ budget for a 3,000+ member community. Curated 50+ artworks for the Antaragni'25 exhibition and directed Galaxy 2025 across 5 halls with 1,000+ participants.</p>
+    </div>
+    <div class="item">
+      <span class="ctx">Inter-IIT Cultural Meets 7.0 and 8.0</span>
+      <h3>Competitions</h3>
+      <ul class="plain">
+        <li>2nd in Costume Making and 3rd in Canvas Painting at Meet 8.0, where IIT Kanpur finished 1st overall.</li>
+        <li>Represented IIT Kanpur in Costume Design at Meet 7.0, placing 6th among 20+ IITs.</li>
+      </ul>
+    </div>
+    <div class="item">
+      <span class="ctx">Antaragni '24 · Aug–Nov 2024</span>
+      <h3>Secretary</h3>
+      <p>Led 30+ first-year volunteers across 10+ venues, from recruitment and training to themed stage decoration.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="skills">
+  <div class="sec-head"><h2 id="skills">Skills</h2></div>
+  <div class="skills">
+    <div><span class="label">Languages</span><p>C++, Python, Rust, C, SQL, JavaScript, MATLAB</p></div>
+    <div><span class="label">ML &amp; data</span><p>PyTorch, TensorFlow, scikit-learn, NumPy, pandas, SciPy, OpenCV</p></div>
+    <div><span class="label">Systems &amp; tools</span><p>Neo4j / Cypher, Redis, Flask, FastAPI, Docker, Git, Linux, pytest</p></div>
+    <div><span class="label">Engineering</span><p>Fusion 360, AutoCAD, XFOIL, Arduino, control design, thermal and vibration modelling</p></div>
+  </div>
+</section>
+
+<section class="contact" id="contact" aria-labelledby="ct">
+  <h2 id="ct">Get in touch</h2>
+  <p style="margin:0">I'm looking for full-time roles starting 2027 in software, AI/ML, product and mechanical engineering.</p>
+  <div class="email">
+    <a href="mailto:yuvrajk23@iitk.ac.in"><code id="email-addr">yuvrajk23@iitk.ac.in</code></a>
+    <button type="button" id="copy-email">Copy email</button>
+    <span id="copy-msg" role="status" aria-live="polite"></span>
+  </div>
+  <div class="links">
+    <a href="https://github.com/yuvraj2815" target="_blank" rel="noopener">github.com/yuvraj2815</a>
+    <a href="https://www.linkedin.com/in/yuvraj-kumar-4462b92b8/" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+</section>
+
+<p class="foot">Yuvraj Kumar · Mechanical Engineering, IIT Kanpur</p>
+</div>
+
+<script>
+(function(){
+  var btns=[].slice.call(document.querySelectorAll('.filters button'));
+  var cards=[].slice.call(document.querySelectorAll('#grid .card'));
+  var count=document.getElementById('count'), empty=document.getElementById('empty');
+  function apply(f){
+    var n=0;
+    cards.forEach(function(c){var show=f==='all'||c.dataset.tags.split(' ').indexOf(f)>-1;c.hidden=!show;if(show)n++;});
+    btns.forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.f===f));});
+    count.textContent=n+(n===1?' project':' projects');
+    empty.hidden=n>0;
+    try{localStorage.setItem('pf-filter',f);}catch(e){}
+  }
+  btns.forEach(function(b){b.addEventListener('click',function(){apply(b.dataset.f);});});
+  var saved='all'; try{saved=localStorage.getItem('pf-filter')||'all';}catch(e){}
+  apply(btns.some(function(b){return b.dataset.f===saved;})?saved:'all');
+
+  var addr=document.getElementById('email-addr'), msg=document.getElementById('copy-msg');
+  document.getElementById('copy-email').addEventListener('click',function(){
+    var text=addr.textContent;
+    function selectIt(){var r=document.createRange();r.selectNodeContents(addr);var s=getSelection();s.removeAllRanges();s.addRange(r);msg.textContent='Selected. Press Ctrl+C to copy.';}
+    try{
+      navigator.clipboard.writeText(text).then(function(){msg.textContent='Copied.';},selectIt);
+    }catch(e){selectIt();}
+  });
+})();
+</script>
+
+</body>
+</html>
